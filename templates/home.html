@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Домашняя страница</title>
-</head>
-<body>
-    <h1>Добро пожаловать на домашнюю страницу!</h1>
-    <p>
-        <a href="{% url 'login' %}?next={{ request.path }}">Войти через Вконтакте</a>
-    </p>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+  Профиль
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'create_feedback' %}" class="btn btn-primary">Добавить воспоминание</a>
+    {% if feedbacks %}
+        <p>Твои воспоминания:</p>
+        {% for feedback in feedbacks %}
+            <p>{{ feedback.title }} - {{ feedback.comment }} - {{ feedback.latitude }} - {{ feedback.longitude }}</p>
+        {% endfor %}
+    {% else %}
+        <p>У вас нет ни одного воспоминания</p>
+    {% endif %}
+{% endblock %}

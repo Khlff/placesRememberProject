@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import Feedback
 
-# Register your models here.
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('user', 'title', 'comment', 'latitude', 'longitude')
+
+
+admin.site.register(Feedback, PostAdmin)

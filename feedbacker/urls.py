@@ -6,5 +6,6 @@ from feedbacker import views
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('new_feedback/', views.create_feedback, name='create_feedback'),
-    path('',views.home, name = 'home')
+    path('home/', views.home, name='home'),
+    path('', views.default, name= 'default')
 ]

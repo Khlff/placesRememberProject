@@ -1,11 +1,19 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from feedbacker.forms import FeedbackForm
+from feedbacker.models import Feedback
+
+
+def default(request):
+    return render(request, 'default.html')
+
 
 @login_required
 def home(request):
     feedbacks = Feedback.objects.filter(user=request.user)
     return render(request, 'home.html', {'feedbacks': feedbacks})
+
 
 @login_required
 def create_feedback(request):
@@ -19,5 +27,3 @@ def create_feedback(request):
     else:
         form = FeedbackForm()
     return render(request, 'feedback_adding.html', {'form': form})
-
-
