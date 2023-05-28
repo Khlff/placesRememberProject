@@ -6,11 +6,14 @@
 
 {% block content %}
     <a href="{% url 'create_feedback' %}" class="btn btn-primary">Добавить воспоминание</a>
+
     {% if feedbacks %}
-        <p>Твои воспоминания:</p>
+        <h2>Твои воспоминания:</h2>
+        <ul>
         {% for feedback in feedbacks %}
-            <p>{{ feedback.title }} - {{ feedback.comment }} - {{ feedback.latitude }} - {{ feedback.longitude }}</p>
+            <li>{{ feedback.title }} - {{ feedback.comment }} - {{ feedback.latitude }} - {{ feedback.longitude }}</li>
         {% endfor %}
+        </ul>
     {% else %}
         <p>У вас нет ни одного воспоминания</p>
     {% endif %}
