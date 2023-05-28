@@ -14,13 +14,20 @@ def default(request):
 def home(request):
     feedbacks = Feedback.objects.filter(user=request.user)
     social_account = SocialAccount.objects.filter(provider='vk', user=request.user).first()
-    first_name = social_account.extra_data.get('first_name')
-    last_name = social_account.extra_data.get('last_name')
-    photo = social_account.extra_data.get('photo')
+    if social_account:
+        first_name = social_account.extra_data.get('first_name')
+        last_name = social_account.extra_data.get('last_name')
+        photo = social_account.extra_data.get('photo')
+        return render(
+            request,
+            'home.html',
+            {'feedbacks': feedbacks, 'first_name': first_name, 'last_name': last_name, 'photo': photo}
+        )
+
     return render(
         request,
         'home.html',
-        {'feedbacks': feedbacks, 'first_name': first_name, 'last_name': last_name, 'photo': photo}
+        {'feedbacks': feedbacks}
     )
 
 
