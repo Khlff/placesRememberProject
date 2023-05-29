@@ -5,6 +5,8 @@
 #### Users can log in with their Vkontakte account and keep their list of places they have visited.
 #### This will help them track their travels and share their recommendations with friends.
 
+* #### Существует проблема отображения мини карты при заходе в созданные воспоминания.
+
 ## Installation
 ### To install the application, you need to clone the repository:
 ```
