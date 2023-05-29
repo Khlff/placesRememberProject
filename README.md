@@ -1,5 +1,6 @@
 ## Places Remember
 [![Coverage Status](https://coveralls.io/repos/github/Khlff/placesRememberProject/badge.svg?branch=master)](https://coveralls.io/github/Khlff/placesRememberProject?branch=master)
+
 #### This web application is a service for storing impressions about visited places.
 #### Users can log in with their Vkontakte account and keep their list of places they have visited.
 #### This will help them track their travels and share their recommendations with friends.
