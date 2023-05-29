@@ -34,6 +34,6 @@ jobs:
     - name: Coveralls GitHub Action
       run: |
         pip install coveralls
-        coverage run --source=myapp -m python3 manage.py test
+        coverage run --source=myapp manage.py test
         coveralls
   
