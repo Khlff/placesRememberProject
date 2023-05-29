@@ -80,12 +80,17 @@ class HomeViewTest(TestCase):
 
     def test_home_with_authenticated_user_with_social_account(self):
         """
-        Тест обращения к home авторизированным через вк пользователем + корректная отдача информации о нём.
+        Тест обращения к home авторизированным через вк пользователем +
+         корректная отдача информации о нём.
         """
-        social_account = SocialAccount.objects.create(
+        SocialAccount.objects.create(
             provider='vk',
             user=self.user,
-            extra_data={'first_name': 'Nikita', 'last_name': 'Ivanov', 'photo': 'https://example.com/photo.jpg'}
+            extra_data={
+                'first_name': 'Nikita',
+                'last_name': 'Ivanov',
+                'photo': 'https://example.com/photo.jpg'
+            }
         )
         response = self.client.get(self.url)
         self.assertEqual(list(response.context['feedbacks']), [])

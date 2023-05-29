@@ -7,11 +7,18 @@ from feedbacker.models import Feedback
 
 
 def default(request):
+    """
+    Функция перехода к стартовой странице с описанием сервиса.
+    """
     return render(request, 'default.html')
 
 
 @login_required
 def home(request):
+    """
+    Функция возврата информации о пользователе
+    :return: Имя, фамилия, аватарка, сохранённые фитбэки.
+    """
     feedbacks = Feedback.objects.filter(user=request.user)
     social_account = SocialAccount.objects.filter(provider='vk', user=request.user).first()
     if social_account:
@@ -21,7 +28,12 @@ def home(request):
         return render(
             request,
             'home.html',
-            {'feedbacks': feedbacks, 'first_name': first_name, 'last_name': last_name, 'photo': photo}
+            {
+                'feedbacks': feedbacks,
+                'first_name': first_name,
+                'last_name': last_name,
+                'photo': photo
+            }
         )
 
     return render(
@@ -33,6 +45,9 @@ def home(request):
 
 @login_required
 def create_feedback(request):
+    """
+    Метод создания фитбэка с сохранением его в бд.
+    """
     if request.method == 'POST':
         form = FeedbackForm(request.POST)
         if form.is_valid():
