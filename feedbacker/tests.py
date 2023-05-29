@@ -23,11 +23,12 @@ class CreateFeedbackTest(TestCase):
         """
         response = self.client.post(
             self.url,
-            {'title': 'Test title', 'comment': 'test comment', 'latitude': 50, 'longitude': 50}
+            {'title': 'Test title', 'comment': 'test comment', 'latitude': 50,
+             'longitude': 50}
         )
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('home'))
-        feedback = Feedback.objects.get(user=self.user)
+        feedback = Feedback.objects.get(user=self.user) # noqa
         self.assertEqual(feedback.title, 'Test title')
         self.assertEqual(feedback.comment, 'test comment')
         self.assertEqual(feedback.latitude, 50)
@@ -56,7 +57,8 @@ class CreateFeedbackTest(TestCase):
         """
         self.client.logout()
         response = self.client.get(self.url)
-        self.assertRedirects(response, f'{reverse("account_login")}?next={self.url}')
+        self.assertRedirects(response,
+                             f'{reverse("account_login")}?next={self.url}')
 
 
 class HomeViewTest(TestCase):
@@ -83,7 +85,7 @@ class HomeViewTest(TestCase):
         Тест обращения к home авторизированным через вк пользователем +
          корректная отдача информации о нём.
         """
-        SocialAccount.objects.create(
+        SocialAccount.objects.create( # noqa
             provider='vk',
             user=self.user,
             extra_data={
@@ -96,7 +98,8 @@ class HomeViewTest(TestCase):
         self.assertEqual(list(response.context['feedbacks']), [])
         self.assertEqual(response.context['first_name'], 'Nikita')
         self.assertEqual(response.context['last_name'], 'Ivanov')
-        self.assertEqual(response.context['photo'], 'https://example.com/photo.jpg')
+        self.assertEqual(response.context['photo'],
+                         'https://example.com/photo.jpg')
 
     def test_home_with_unauthenticated_user(self):
         """
@@ -104,4 +107,5 @@ class HomeViewTest(TestCase):
         """
         self.client.logout()
         response = self.client.get(self.url)
-        self.assertRedirects(response, f'{reverse("account_login")}?next={self.url}')
+        self.assertRedirects(response,
+                             f'{reverse("account_login")}?next={self.url}')

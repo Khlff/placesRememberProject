@@ -19,8 +19,8 @@ def home(request):
     Функция возврата информации о пользователе
     :return: Имя, фамилия, аватарка, сохранённые фитбэки.
     """
-    feedbacks = Feedback.objects.filter(user=request.user)
-    social_account = SocialAccount.objects.filter(provider='vk', user=request.user).first()
+    feedbacks = Feedback.objects.filter(user=request.user) # noqa
+    social_account = SocialAccount.objects.filter(provider='vk', user=request.user).first() # noqa
     if social_account:
         first_name = social_account.extra_data.get('first_name')
         last_name = social_account.extra_data.get('last_name')

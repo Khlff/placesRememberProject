@@ -10,4 +10,4 @@ class Feedback(models.Model):
     longitude = models.FloatField()
 
     def __str__(self):
-        return self.title
+        return str(self.title)
