@@ -27,6 +27,10 @@ jobs:
     - name: Migrate database  
       run: |
         python manage.py migrate
+    - name: Analysing the code with pylint
+      run: |
+        pip install pylint
+        pylint **/*.py
     - name: Run Tests
       run: |
         python manage.py test
